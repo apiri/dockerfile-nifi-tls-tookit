@@ -26,6 +26,8 @@ RUN   apk --update add tar curl && \
         curl ${DIST_MIRROR}/${VERSION}/nifi-toolkit-${VERSION}-bin.tar.gz | tar xvz -C ${NIFI_HOME} --strip-components=1 && \
         rm ${NIFI_HOME}/bin/*.bat
 
-WORKDIR ${NIFI_HOME}/bin
+VOLUME /generated
 
-ENTRYPOINT ["./tls-toolkit.sh"]
+WORKDIR /generated
+
+ENTRYPOINT ["/opt/nifi-tls-toolkit/bin/tls-toolkit.sh"]
